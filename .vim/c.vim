@@ -73,7 +73,10 @@ endif
 set fdm=syntax
 set foldnestmax=3
 " syn region myFold start="{" end="}" transparent fold
-%foldopen!
+" %foldopen!
+set foldlevelstart=99
+set foldlevel=99
+" autocmd BufRead * normal zR
 "  - bind meta< and meta> for fold colapse and extend
 "map <m-,> :foldclose<CR>
 "map <m-.> :foldopen<CR>

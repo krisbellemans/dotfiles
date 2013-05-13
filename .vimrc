@@ -60,6 +60,8 @@ map <C-0> :!ctags -R --c-kinds=+pxfd --fields=+iaS --extra=+q .<CR>
 map + zfa}
 " au BufWinLeave *.* mkview
 " au BufWinEnter *.* silent loadview
+map ; :
+map <Space> <c-d>
 set nocp
 filetype plugin on
 let OmniCpp_GlobalScopeSearch = 1

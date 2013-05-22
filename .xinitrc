@@ -24,7 +24,7 @@ if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
 /usr/bin/numlockx on
-/usr/bin/conky -c /home/kris/.conky-dwm.cfg | while read -r; do xsetroot -name "$REPLY"; done &
+(/usr/bin/conky -c /home/kris/.conky-dwm.cfg | while read REPLY; do xsetroot -name "$REPLY"; done) &
 # Start the window manager:
 if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then
   exec ck-launch-session /usr/bin/dwm

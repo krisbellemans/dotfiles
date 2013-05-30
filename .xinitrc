@@ -23,6 +23,7 @@ fi
 if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
+feh --bg-scale .bg.jpg
 /usr/bin/numlockx on
 (/usr/bin/conky -c /home/kris/.conky-dwm.cfg | while read REPLY; do xsetroot -name "$REPLY"; done) &
 # Start the window manager:

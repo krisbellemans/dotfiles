@@ -45,6 +45,10 @@ source $ZSH/oh-my-zsh.sh
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
+
+# Change cursor to blinking underline
+echo -e -n "\x1b[\x33 q"
+
 export TERM=xterm-256color
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/kris/workspace/toolchain/gnu-arm-installer/gnu-arm-installer/install/bin
 svnmod() {svn stat | awk '/^M/{print }';}

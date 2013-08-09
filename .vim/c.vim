@@ -15,8 +15,15 @@ set shiftwidth=8
 set noexpandtab
 
 " line wrapping in c comments not c code
-set textwidth=78        " Set the line wrap length
+set textwidth=80        " Set the line wrap length
 set cc=80
+map <F9> :silent make thumb-debug\|redraw!\|:cw<CR>
+map <F10> :silent make thumb-release\|redraw!\|:cw<CR>
+map <F11> :silent make clean\|redraw!\|:cw<CR>
+
+imap <F9> <ESC>:silent make thumb-debug\|redraw!\|:cw<CR>
+imap <F10> <ESC>:silent make thumb-release\|redraw!\|:cw<CR>
+imap <F11> <ESC>:silent make clean\|redraw!\|:cw<CR>
 
 syn match ErrorLeadSpace /^ \+/      " highlight any leading spaces
 syn match ErrorTailSpace / \+$/      " highlight any trailing spaces
@@ -67,11 +74,11 @@ set cinoptions=:0l1t0g0
 "  - fold by syntax, use {}'s
 "  - start with all folds open
 if winwidth(0) > 80
-    set foldcolumn=4
+    set foldcolumn=5
 endif
 
 set fdm=syntax
-set foldnestmax=3
+set foldnestmax=5
 " syn region myFold start="{" end="}" transparent fold
 " %foldopen!
 set foldlevelstart=99

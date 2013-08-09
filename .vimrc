@@ -53,6 +53,7 @@ else
 endif
 set nu
 set cul
+set cursorcolumn
 set printoptions=number:y
 set ls=2
 set hlsearch

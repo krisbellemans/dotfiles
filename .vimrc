@@ -78,6 +78,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 imap jj <ESC>
 set nobackup
 set nowritebackup
+set wildchar=<Tab> wildmenu wildmode=full
 "if &term =~ "xterm\\|rxvt"
      " use an orange cursor in insert mode
    " let &t_SI = "\<Esc>]12;orange\x7"

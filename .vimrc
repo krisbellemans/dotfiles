@@ -57,6 +57,7 @@ set cursorcolumn
 set printoptions=number:y
 set ls=2
 set hlsearch
+set showmatch
 map <C-0> :!ctags -R --c-kinds=+pxfd --fields=+iaS --extra=+q .<CR>
 map + zfa}
 " au BufWinLeave *.* mkview
@@ -67,7 +68,22 @@ set nocp
 filetype plugin on
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:bufferline_echo = 0
+let g:airline_symbols.space = "\ua0"
+
+set completeopt-=preview
 set guifont=Inconsolata\ 12
+"set guifont=Inconsolata\ for\ Powerline\ Bold\ 12
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r

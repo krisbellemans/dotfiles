@@ -1,8 +1,10 @@
 !xterm*vt100*geometry: 80x50
+*VT100*translations: #override Meta <Btn1Up>: exec-formatted("firefox '%t'", PRIMARY)
 !xterm*font: -adobe-courier-medium-r-normal--14-100-100-100-m-90-iso10646-1
 !xterm*font: -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso10646-1
 !xterm*faceName:           terminus:bold:pixelsize=14
 xterm*faceName:		inconsolata:bold:pixelsize=16
+!xterm*faceName:		inconsolata\ for\ powerline:bold:pixelsize=16
 !xterm*font: -misc-fixed-medium-r-normal--15--75-75-c--iso10646-1
 xterm*saveLines: 50000
 !xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48

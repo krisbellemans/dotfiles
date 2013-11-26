@@ -23,7 +23,7 @@ fi
 if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
-/usr/local/bin/feh --bg-scale .bg.jpg
+/usr/local/bin/feh --bg-tile .bg.png
 /usr/bin/numlockx on
 (/usr/bin/conky -c /home/kris/.conky-dwm.cfg | while read REPLY; do xsetroot -name "$REPLY"; done) &
 /usr/bin/xscreensaver -nosplash &

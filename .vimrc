@@ -8,6 +8,7 @@ if has('autocmd')
     filetype plugin indent on
 
     autocmd BufEnter *.c,*.h,*.cpp,*.hpp,*.cc source ~/.vim/c.vim
+    autocmd BufEnter *.py,*.py3 source ~/.vim/python.vim
 endif
 syntax enable
 

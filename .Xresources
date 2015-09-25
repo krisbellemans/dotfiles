@@ -2,10 +2,11 @@
 *VT100*translations: #override Meta <Btn1Up>: exec-formatted("firefox '%t'", PRIMARY)
 !xterm*font: -adobe-courier-medium-r-normal--14-100-100-100-m-90-iso10646-1
 !xterm*font: -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso10646-1
-!xterm*faceName:           terminus:pixelsize=16
-xterm*faceName:		inconsolata:bold:pixelsize=16
-!xterm*faceName:		consolas:pixelsize=16
-!xterm*faceName:		inconsolata\ for\ powerline:bold:pixelsize=16
+!xterm*faceName:           terminus:bold:pixelsize=16
+!xterm*faceName:		inconsolata:bold:pixelsize=16
+!xterm*faceName:		consolas:pixelsize=12
+xterm*faceName:		inconsolata\ for\ powerline:bold:pixelsize=16
+!xterm*faceName:		inconsolata\ for\ powerline:pixelsize=16
 !xterm*font: -misc-fixed-medium-r-normal--15--75-75-c--iso10646-1
 xterm*saveLines: 50000
 !xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48
@@ -66,10 +67,10 @@ xterm*eightBitInput: false
 ! Xft settings ---------------------------------------------------------------
 
 Xft.dpi:        96
-Xft.antialias:  true
-Xft.rgba:       rgb
-Xft.hinting:    true
-Xft.hintstyle:  hintslight
+!Xft.antialias:  true
+!Xft.rgba:       rgb
+!Xft.hinting:    true
+!Xft.hintstyle:  hintslight
 
 gnuplot*background: white
 gnuplot*textColor: black
@@ -83,6 +84,30 @@ gnuplot*line5Color: cyan
 gnuplot*line6Color: sienna
 gnuplot*line7Color: orange
 gnuplot*line8Color: coral
+
+! urxvt
+URxvt*buffered: true
+URxvt*cursorBlink: true
+!URxvt*underlineColor: yellow
+URxvt.allow_bold: true
+URxvt.font: xft:inconsolata\ for\ powerline:size=12:minspace=True:antialias=true:hinting=true
+URxvt.boldFont: xft:inconsolata\ for\ powerline:bold:size=12:antialias=true:hinting=true
+!URxvt*font: xft:Ubuntu Mono derivative Powerline:regular:pixelsize=16
+!URxvt*imFont: xft:Ubuntu Mono derivative Powerline:regular:pixelsize=16
+!URxvt*boldFont: xft:Ubuntu Mono derivative Powerline:bold:pixelsize=16
+!URxvt*italicFont: xft:Ubuntu Mono derivative Powerline:italic:pixelsize=16
+!URxvt*boldItalicFont: xft:Ubuntu Mono derivative Powerline:bold:italic:pixelsize=16
+!URxvt.letterSpace: -1
+URxvt*depth: 32
+URxvt*borderless: 1
+URxvt*scrollBar: false
+URxvt*loginShell: true
+Urxvt*secondaryScroll: true # Enable Shift-PageUp/Down in screen
+URxvt*saveLines: 5000
+URxvt*termName: rxvt-unicode
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 1
 
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 

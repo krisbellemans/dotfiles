@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH=$HOME/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -14,6 +14,7 @@ ZSH_THEME="candy"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias info="info --vi-keys"
+alias rox=cd\ ~/workspace/roxell/project/controlline
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -36,7 +37,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(svn git vi-mode)
+plugins=(svn git vi-mode command-not-found ssh-agent)
 export SVN_SHOW_BRANCH=true
 
 source $ZSH/oh-my-zsh.sh
@@ -45,10 +46,11 @@ source $ZSH/oh-my-zsh.sh
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
-
 # Change cursor to blinking underline
 echo -e -n "\x1b[\x33 q"
 
+setopt autopushd
+
 export TERM=xterm-256color
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/kris/workspace/toolchain/gnu-arm-installer/gnu-arm-installer/install/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/kris/workspace/toolchain/gnu-arm-installer/gnu-arm-installer/install/bin:/opt/OSELAS.Toolchain-2011.11.1/arm-cortexa9-linux-gnueabi/gcc-4.6.2-glibc-2.14.1-binutils-2.21.1a-kernel-2.6.39-sanitized/bin
 svnmod() {svn stat | awk '/^M/{print }';}

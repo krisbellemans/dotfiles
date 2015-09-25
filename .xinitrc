@@ -23,13 +23,15 @@ fi
 if [ -f $usermodmap ]; then
     xmodmap $usermodmap
 fi
-/usr/bin/feh --bg-scale .bg.jpg
+/usr/bin/feh --bg-tile .bg.png
 /usr/bin/numlockx on
 (/usr/bin/conky -c /home/kris/.conky-dwm.cfg | while read REPLY; do xsetroot -name "$REPLY"; done) &
 /usr/bin/xscreensaver -nosplash &
+xset fp+ /home/kris/.fonts/xbm/
 # Start the window manager:
 if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then
   exec ck-launch-session /usr/bin/dwm
 else
-  exec /usr/bin/dwm
+  exec /usr/local/src/dwm-6.0/dwm
+  #exec /usr/bin/dwm
 fi

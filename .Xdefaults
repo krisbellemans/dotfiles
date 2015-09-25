@@ -2,7 +2,8 @@
 !xterm*font: -adobe-courier-medium-r-normal--14-100-100-100-m-90-iso10646-1
 !xterm*font: -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso10646-1
 !xterm*faceName:           terminus:bold:pixelsize=14
-xterm*faceName:		inconsolata:bold:pixelsize=16
+!xterm*faceName:           terminus:pixelsize=14
+xterm*faceName:		inconsolata:bold:pixelsize=20
 !xterm*faceName: Source\ Code\ Pro:regular
 !xterm*font: -misc-fixed-medium-r-normal--15--75-75-c--iso10646-1
 xterm*saveLines: 50000

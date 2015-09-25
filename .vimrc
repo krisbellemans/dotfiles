@@ -1,6 +1,6 @@
 set nocompatible
 filetype on
-set path=$PWD/**
+set path=$PWD/**,/usr/include/**,/usr/local/include/**
 set shiftwidth=4
 set softtabstop=4
 set spell
@@ -39,11 +39,16 @@ fun! <SID>X(a)
 endfun
 
 if has('gui_running')
-    set background=dark
+    " let g:solarized_italic=0
+    " let g:solarized_bold=0
+    set background=light
     colorscheme solarized
-    hi Error80        gui=NONE   guifg=#ffffff   guibg=#6e2e2e
-    hi ErrorLeadSpace gui=NONE   guifg=#ffffff   guibg=#6e2e2e
-    hi ErrorTailSpace gui=NONE   guifg=#ffffff   guibg=#6e2e2e
+    " hi Error80        gui=NONE   guifg=#ffffff   guibg=#6e2e2e
+    hi Error80        gui=NONE   guifg=#ffffff   guibg=#93a1a1
+    " hi ErrorLeadSpace gui=NONE   guifg=#ffffff   guibg=#6e2e2e
+    hi ErrorLeadSpace gui=NONE   guifg=#ffffff   guibg=#93a1a1
+    " hi ErrorTailSpace gui=NONE   guifg=#ffffff   guibg=#6e2e2e
+    hi ErrorTailSpace gui=NONE   guifg=#ffffff   guibg=#93a1a1
 else
     set background=dark
     colorscheme solarized
@@ -55,7 +60,7 @@ endif
 set nu
 set cul
 set cursorcolumn
-set printoptions=number:y
+" set printoptions=number:y
 set ls=2
 set hlsearch
 set showmatch
@@ -64,15 +69,26 @@ map + zfa}
 " au BufWinLeave *.* mkview
 " au BufWinEnter *.* silent loadview
 map ; :
+map <C-j> :bp<CR>
+map <C-k> :bn<CR>
+"noremap ;; ;
+noremap <C-;> ;
+"map : ;
 map <Space> <c-d>
 set nocp
 filetype plugin on
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_left_sep = ''
+let g:airline#extensions#tabline#left_sep = ''
 let g:airline_left_alt_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_right_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
 let g:airline_right_alt_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -81,10 +97,12 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:bufferline_echo = 0
 let g:airline_symbols.space = "\ua0"
-
+let g:airline#extensions#whitespace#enabled = 0
+set noshowmode
 set completeopt-=preview
-set guifont=Inconsolata\ 12
-"set guifont=Inconsolata\ for\ Powerline\ Bold\ 12
+"set guifont=Inconsolata\ 12
+set guifont=Inconsolata\ for\ Powerline\ 12
+"set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
@@ -96,6 +114,8 @@ imap jj <ESC>
 set nobackup
 set nowritebackup
 set wildchar=<Tab> wildmenu wildmode=full
+
+runtime ftplugin/man.vim
 "if &term =~ "xterm\\|rxvt"
      " use an orange cursor in insert mode
    " let &t_SI = "\<Esc>]12;orange\x7"
@@ -115,16 +135,16 @@ set wildchar=<Tab> wildmenu wildmode=full
 "if &term =~ "xterm\\|rxvt"
         " use an orange cursor in insert mode
 "let &t_SI = "\<Esc>]12;orange\x7"
-let &t_SI = "\e]12;orange\x7"
+"let &t_SI = "\e]12;orange\x7"
 "let &t_SI .= "\<Esc>[3 q"
-let &t_SI .= "\e[3 q"
+"let &t_SI .= "\e[3 q"
 	"         " use a red cursor otherwise
 
 "let &t_EI = "\<Esc>]12;red\x7"
-let &t_EI = "\e]12;red\x7"
+"let &t_EI = "\e]12;red\x7"
 "let &t_EI .= "\<Esc>[1 q"
-let &t_EI .= "\e[1 q"
-silent !echo -e "\033]12;red\007"
+"let &t_EI .= "\e[1 q"
+"silent !echo -e "\033]12;red\007"
 	"                     " reset cursor when vim exits
 autocmd VimLeave * silent !echo -e "\033]112\007"
 	"                             " use \003]12;gray\007 for

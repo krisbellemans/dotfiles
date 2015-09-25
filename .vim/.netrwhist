@@ -1,2 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/kris/workspace/roxell/project/controlline/unittest/transport'
+let g:netrw_dirhist_2='/home/kris/workspace/roxell/project/controlline/unittest'
+let g:netrw_dirhist_3='/home/kris/workspace/roxell/project/controlline/unittest/transport'
+let g:netrw_dirhist_4='/home/kris/workspace/roxell/project/controlline/unittest'
+let g:netrw_dirhist_5='/home/kris/workspace/roxell/project/controlline'
+let g:netrw_dirhist_6='/home/kris/workspace/roxell/project/controlline/transport'

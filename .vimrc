@@ -43,17 +43,18 @@ if has('gui_running')
     " let g:solarized_bold=0
     set background=light
     colorscheme solarized
-    " hi Error80        gui=NONE   guifg=#ffffff   guibg=#6e2e2e
-    hi Error80        gui=NONE   guifg=#ffffff   guibg=#93a1a1
+    " hi Error80        gui=NONE   guifg=#ffffff   guibg=#93a1a1
+    hi Error132        gui=NONE   guifg=#ffffff   guibg=#93a1a1
     " hi ErrorLeadSpace gui=NONE   guifg=#ffffff   guibg=#6e2e2e
     hi ErrorLeadSpace gui=NONE   guifg=#ffffff   guibg=#93a1a1
     " hi ErrorTailSpace gui=NONE   guifg=#ffffff   guibg=#6e2e2e
     hi ErrorTailSpace gui=NONE   guifg=#ffffff   guibg=#93a1a1
 else
-    set background=dark
+    set background=light
     colorscheme solarized
     set mouse=a
-    exec "hi Error80        cterm=NONE   ctermfg=" . <SID>X(79) . " ctermbg=" . <SID>X(32)
+    " exec "hi Error80        cterm=NONE   ctermfg=" . <SID>X(79) . " ctermbg=" . <SID>X(32)
+    exec "hi Error132        cterm=NONE   ctermfg=" . <SID>X(79) . " ctermbg=" . <SID>X(32)
     exec "hi ErrorLeadSpace cterm=NONE   ctermfg=" . <SID>X(79) . " ctermbg=" . <SID>X(33)
     exec "hi ErrorTailSpace cterm=NONE   ctermfg=" . <SID>X(79) . " ctermbg=" . <SID>X(33)
 endif

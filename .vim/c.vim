@@ -15,8 +15,9 @@ set shiftwidth=8
 set noexpandtab
 
 " line wrapping in c comments not c code
-set textwidth=80        " Set the line wrap length
-set cc=80
+set textwidth=132        " Set the line wrap length
+" set cc=80
+set cc=132
 map <F9> :silent make -j3 \|redraw!\|:cw<CR>
 map <F10> :silent make! -j3 check\|redraw!\|:cw<CR>
 map <F11> :silent make clean\|redraw!\|:cw<CR>
@@ -27,7 +28,8 @@ imap <F11> <ESC>:silent make clean\|redraw!\|:cw<CR>
 
 syn match ErrorLeadSpace /^ \+/      " highlight any leading spaces
 syn match ErrorTailSpace / \+$/      " highlight any trailing spaces
-match Error80            /\%>80v.\+/ " highlight anything past 80 in red
+" match Error80            /\%>80v.\+/ " highlight anything past 80 in red
+match Error132            /\%>132v.\+/ " highlight anything past 132 in red
 
 " more types...
 syn keyword cType uint ubyte ulong uint64_t uint32_t uint16_t uint8_t boolean_t int64_t int32_t int16_t int8_t u_int64_t u_int32_t u_int16_t u_int8_t

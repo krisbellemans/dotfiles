@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/oh-my-zsh
+ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -50,6 +50,8 @@ fi
 echo -e -n "\x1b[\x33 q"
 
 setopt autopushd
+alias grep="/bin/grep --color=auto"
+unset GREP_OPTIONS
 
 export TERM=xterm-256color
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/kris/workspace/toolchain/gnu-arm-installer/gnu-arm-installer/install/bin:/opt/OSELAS.Toolchain-2011.11.1/arm-cortexa9-linux-gnueabi/gcc-4.6.2-glibc-2.14.1-binutils-2.21.1a-kernel-2.6.39-sanitized/bin

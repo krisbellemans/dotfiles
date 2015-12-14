@@ -22,7 +22,7 @@ map <F9> :silent make -j3 \|redraw!\|:cw<CR>
 map <F10> :silent make! -j3 check\|redraw!\|:cw<CR>
 map <F11> :silent make clean\|redraw!\|:cw<CR>
 
-imap <F9> <ESC>:silent make -j3 \|redraw!\|:cw<CR>
+imap <F9> <ESC>:silent make! -j3 \|redraw!\|:cw<CR>
 imap <F10> <ESC>:silent make! -j3 check\|redraw!\|:cw<CR>
 imap <F11> <ESC>:silent make clean\|redraw!\|:cw<CR>
 

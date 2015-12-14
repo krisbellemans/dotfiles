@@ -70,8 +70,10 @@ map + zfa}
 " au BufWinLeave *.* mkview
 " au BufWinEnter *.* silent loadview
 map ; :
-map <C-j> :bp<CR>
-map <C-k> :bn<CR>
+map <C-h> :bp<CR>
+map <C-l> :bn<CR>
+map <C-j> <C-e>
+map <C-k> <C-y>
 "noremap ;; ;
 noremap <C-;> ;
 "map : ;
@@ -80,6 +82,7 @@ set nocp
 filetype plugin on
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
+let g:airline_theme='solarized'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_left_sep = ''

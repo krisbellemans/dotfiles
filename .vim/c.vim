@@ -93,7 +93,7 @@ set foldlevel=99
 " cool C abbreviations...
 abb #i #include
 abb #d #define
-
+abb /** /**********************************************************************/
 " source ~/.vim/ccommenter.vim
 " source ~/.vim/MakeDoxygenComment.vim
 

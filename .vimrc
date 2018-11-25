@@ -1,6 +1,8 @@
 set nocompatible
 filetype on
 set path=$PWD/**,/usr/include/**,/usr/local/include/**
+"set tabstop=8
+"set expandtab
 set shiftwidth=4
 set softtabstop=4
 set spell
@@ -50,7 +52,7 @@ if has('gui_running')
     " hi ErrorTailSpace gui=NONE   guifg=#ffffff   guibg=#6e2e2e
     hi ErrorTailSpace gui=NONE   guifg=#ffffff   guibg=#93a1a1
 else
-    set background=light
+    set background=dark
     colorscheme solarized
     set mouse=a
     " exec "hi Error80        cterm=NONE   ctermfg=" . <SID>X(79) . " ctermbg=" . <SID>X(32)
@@ -115,11 +117,17 @@ set guioptions=
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 imap jj <ESC>
+imap jk <ESC>
 set nobackup
 set nowritebackup
 set wildchar=<Tab> wildmenu wildmode=full
 
 runtime ftplugin/man.vim
+" python-mode
+let g:pymode_python = 'python3'
+let g:pymode_folding = 0
+let g:pymode_options_max_line_length = 99
+
 "if &term =~ "xterm\\|rxvt"
      " use an orange cursor in insert mode
    " let &t_SI = "\<Esc>]12;orange\x7"

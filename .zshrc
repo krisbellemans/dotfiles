@@ -7,6 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
 ZSH_THEME="candy"
+#ZSH_THEME="agnoster"
 #ZSH_THEME="af-magic"
 
 
@@ -15,6 +16,8 @@ ZSH_THEME="candy"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias info="info --vi-keys"
 alias rox=cd\ ~/workspace/roxell/project/controlline
+alias gitk="gitk --all &"
+alias make="make -j4"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -37,7 +40,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(svn git vi-mode command-not-found ssh-agent)
+plugins=(svn git vi-mode zsh-syntax-highlighting command-not-found ssh-agent)
 export SVN_SHOW_BRANCH=true
 
 source $ZSH/oh-my-zsh.sh
@@ -47,12 +50,12 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 # Change cursor to blinking underline
-echo -e -n "\x1b[\x33 q"
+# echo -e -n "\x1b[\x33 q"
 
 setopt autopushd
 alias grep="/bin/grep --color=auto"
 unset GREP_OPTIONS
 
 export TERM=xterm-256color
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/kris/workspace/toolchain/gnu-arm-installer/gnu-arm-installer/install/bin:/opt/OSELAS.Toolchain-2011.11.1/arm-cortexa9-linux-gnueabi/gcc-4.6.2-glibc-2.14.1-binutils-2.21.1a-kernel-2.6.39-sanitized/bin
+export PATH=~/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/kris/workspace/toolchain/gnu-arm-installer/gnu-arm-installer/install/bin:/opt/OSELAS.Toolchain-2011.11.1/arm-cortexa9-linux-gnueabi/gcc-4.6.2-glibc-2.14.1-binutils-2.21.1a-kernel-2.6.39-sanitized/bin
 svnmod() {svn stat | awk '/^M/{print }';}

@@ -5,8 +5,10 @@
 !xterm*faceName:           terminus:bold:pixelsize=16
 !xterm*faceName:		inconsolata:bold:pixelsize=16
 !xterm*faceName:		consolas:pixelsize=12
+!xterm*faceName:		inconsolata\ for\ powerline:bold:pixelsize=16
+!xterm*faceName:		Droid\ Sans\ Mono\ Slashed\ for\ Powerline:pixelsize=14
+!xterm*faceName:		Ubuntu\ Mono\ derivative\ Powerline:pixelsize=16
 xterm*faceName:		inconsolata\ for\ powerline:bold:pixelsize=16
-!xterm*faceName:		inconsolata\ for\ powerline:pixelsize=16
 !xterm*font: -misc-fixed-medium-r-normal--15--75-75-c--iso10646-1
 xterm*saveLines: 50000
 !xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48

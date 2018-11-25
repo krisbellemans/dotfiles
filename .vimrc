@@ -13,6 +13,7 @@ if has('autocmd')
     autocmd BufEnter *.py,*.py3 source ~/.vim/python.vim
 endif
 syntax enable
+set backspace=indent,eol,start
 
 " map a urxvt cube number to an xterm-256 cube number
 fun! <SID>M(a)
@@ -61,6 +62,7 @@ else
     exec "hi ErrorTailSpace cterm=NONE   ctermfg=" . <SID>X(79) . " ctermbg=" . <SID>X(33)
 endif
 set nu
+set rnu
 set cul
 set cursorcolumn
 " set printoptions=number:y
@@ -118,6 +120,7 @@ autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 imap jj <ESC>
 imap jk <ESC>
+set nospell
 set nobackup
 set nowritebackup
 set wildchar=<Tab> wildmenu wildmode=full

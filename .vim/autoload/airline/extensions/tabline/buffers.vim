@@ -1,10 +1,12 @@
-" MIT License. Copyright (c) 2013-2015 Bailey Ling.
+" MIT License. Copyright (c) 2013-2016 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
 
 scriptencoding utf-8
 
 let s:buffer_idx_mode = get(g:, 'airline#extensions#tabline#buffer_idx_mode', 0)
 let s:show_tab_type = get(g:, 'airline#extensions#tabline#show_tab_type', 1)
+let s:buffers_label = get(g:, 'airline#extensions#tabline#buffers_label', 'buffers')
+let s:keymap_ignored_filetypes = get(g:, 'airline#extensions#tabline#keymap_ignored_filetypes', ['vimfiler', 'nerdtree'])
 let s:spc = g:airline_symbols.space
 
 let s:current_bufnr = -1
@@ -12,8 +14,7 @@ let s:current_modified = 0
 let s:current_tabline = ''
 let s:current_visible_buffers = []
 
-let s:number_map = &encoding == 'utf-8'
-      \ ? {
+let s:number_map = {
       \ '0': '⁰',
       \ '1': '¹',
       \ '2': '²',
@@ -25,6 +26,8 @@ let s:number_map = &encoding == 'utf-8'
       \ '8': '⁸',
       \ '9': '⁹'
       \ }
+let s:number_map = &encoding == 'utf-8'
+      \ ? get(g:, 'airline#extensions#tabline#buffer_idx_format', s:number_map)
       \ : {}
 
 function! airline#extensions#tabline#buffers#off()
@@ -37,11 +40,9 @@ function! airline#extensions#tabline#buffers#on()
   augroup airline_tabline_buffers
     autocmd!
     autocmd BufDelete * call airline#extensions#tabline#buffers#invalidate()
+    autocmd User BufMRUChange call airline#extensions#tabline#buflist#invalidate()
+    autocmd User BufMRUChange call airline#extensions#tabline#buffers#invalidate()
   augroup END
-
-  if s:buffer_idx_mode
-    call s:define_buffer_idx_mode_mappings()
-  endif
 endfunction
 
 function! airline#extensions#tabline#buffers#invalidate()
@@ -49,6 +50,7 @@ function! airline#extensions#tabline#buffers#invalidate()
 endfunction
 
 function! airline#extensions#tabline#buffers#get()
+  call <sid>map_keys()
   let cur = bufnr('%')
   if cur == s:current_bufnr
     if !g:airline_detect_modified || getbufvar(cur, '&modified') == s:current_modified
@@ -65,23 +67,16 @@ function! airline#extensions#tabline#buffers#get()
       continue
     endif
 
-    if cur == nr
-      if g:airline_detect_modified && getbufvar(nr, '&modified')
-        let group = 'airline_tabmod'
-      else
-        let group = 'airline_tabsel'
-      endif
+    let group = airline#extensions#tabline#group_of_bufnr(tab_bufs, nr)
+
+    if nr == cur
       let s:current_modified = (group == 'airline_tabmod') ? 1 : 0
-    else
-      if g:airline_detect_modified && getbufvar(nr, '&modified')
-        let group = 'airline_tabmod_unsel'
-      elseif index(tab_bufs, nr) > -1
-        let group = 'airline_tab'
-      else
-        let group = 'airline_tabhid'
-      endif
     endif
 
+    " Neovim feature: Have clickable buffers
+    if has("tablineat")
+      call b.add_raw('%'.nr.'@airline#extensions#tabline#buffers#clickbuf@')
+    endif
     if s:buffer_idx_mode
       if len(s:number_map) > 0
         call b.add_section(group, s:spc . get(s:number_map, l:index, '') . '%(%{airline#extensions#tabline#get_buffer_name('.nr.')}%)' . s:spc)
@@ -92,13 +87,19 @@ function! airline#extensions#tabline#buffers#get()
     else
       call b.add_section(group, s:spc.'%(%{airline#extensions#tabline#get_buffer_name('.nr.')}%)'.s:spc)
     endif
+    if has("tablineat")
+      call b.add_raw('%X')
+    endif
   endfor
 
   call b.add_section('airline_tabfill', '')
   call b.split()
   call b.add_section('airline_tabfill', '')
   if s:show_tab_type
-    call b.add_section('airline_tabtype', ' buffers ')
+    call b.add_section_spaced('airline_tabtype', s:buffers_label)
+  endif
+  if tabpagenr('$') > 1
+    call b.add_section_spaced('airline_tabmod', printf('%s %d/%d', "tab", tabpagenr(), tabpagenr('$')))
   endif
 
   let s:current_bufnr = cur
@@ -160,8 +161,8 @@ function! s:get_visible_buffers()
 endfunction
 
 function! s:select_tab(buf_index)
-  " no-op when called in the NERDTree buffer
-  if exists('t:NERDTreeBufName') && bufname('%') == t:NERDTreeBufName
+  " no-op when called in 'keymap_ignored_filetypes'
+  if count(s:keymap_ignored_filetypes, &ft)
     return
   endif
 
@@ -176,14 +177,76 @@ function! s:select_tab(buf_index)
   endif
 endfunction
 
-function! s:define_buffer_idx_mode_mappings()
-  noremap! <unique> <Plug>AirlineSelectTab1 :call <SID>select_tab(0)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab2 :call <SID>select_tab(1)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab3 :call <SID>select_tab(2)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab4 :call <SID>select_tab(3)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab5 :call <SID>select_tab(4)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab6 :call <SID>select_tab(5)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab7 :call <SID>select_tab(6)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab8 :call <SID>select_tab(7)<CR>
-  noremap! <unique> <Plug>AirlineSelectTab9 :call <SID>select_tab(8)<CR>
+function! s:jump_to_tab(offset)
+    let l = s:current_visible_buffers
+    let i = index(l, bufnr('%'))
+    if i > -1
+        exec 'b!' . l[float2nr(fmod(i + a:offset, len(l)))]
+    endif
+endfunction
+
+function! s:map_keys()
+  if s:buffer_idx_mode
+    noremap <silent> <Plug>AirlineSelectTab1 :call <SID>select_tab(0)<CR>
+    noremap <silent> <Plug>AirlineSelectTab2 :call <SID>select_tab(1)<CR>
+    noremap <silent> <Plug>AirlineSelectTab3 :call <SID>select_tab(2)<CR>
+    noremap <silent> <Plug>AirlineSelectTab4 :call <SID>select_tab(3)<CR>
+    noremap <silent> <Plug>AirlineSelectTab5 :call <SID>select_tab(4)<CR>
+    noremap <silent> <Plug>AirlineSelectTab6 :call <SID>select_tab(5)<CR>
+    noremap <silent> <Plug>AirlineSelectTab7 :call <SID>select_tab(6)<CR>
+    noremap <silent> <Plug>AirlineSelectTab8 :call <SID>select_tab(7)<CR>
+    noremap <silent> <Plug>AirlineSelectTab9 :call <SID>select_tab(8)<CR>
+    noremap <silent> <Plug>AirlineSelectPrevTab :<C-u>call <SID>jump_to_tab(-v:count1)<CR>
+    noremap <silent> <Plug>AirlineSelectNextTab :<C-u>call <SID>jump_to_tab(v:count1)<CR>
+  endif
+endfunction
+
+function! airline#extensions#tabline#buffers#clickbuf(minwid, clicks, button, modifiers) abort
+    " Clickable buffers
+    " works only in recent NeoVim with has('tablineat')
+
+    " single mouse button click without modifiers pressed
+    if a:clicks == 1 && a:modifiers !~# '[^ ]'
+      if a:button is# 'l'
+        " left button - switch to buffer
+        silent execute 'buffer' a:minwid
+      elseif a:button is# 'm'
+        " middle button - delete buffer
+
+        if get(g:, 'airline#extensions#tabline#middle_click_preserves_windows', 0) == 0
+          " just simply delete the clicked buffer. This will cause windows
+          " associated with the clicked buffer to be closed.
+          silent execute 'bdelete' a:minwid
+        else
+          " find windows displaying the clicked buffer and open an new
+          " buffer in them.
+          let current_window = bufwinnr("%")
+          let window_number = bufwinnr(a:minwid)
+          let last_window_visited = -1
+
+          " Set to 1 if the clicked buffer was open in any windows.
+          let buffer_in_window = 0
+
+          " Find the next window with the clicked buffer open. If bufwinnr()
+          " returns the same window number, this is because we clicked a new
+          " buffer, and then tried editing a new buffer. Vim won't create a
+          " new empty buffer for the same window, so we get the same window
+          " number from bufwinnr(). In this case we just give up and don't
+          " delete the buffer.
+          " This could be made cleaner if we could check if the clicked buffer
+          " is a new buffer, but I don't know if there is a way to do that.
+          while window_number != -1 && window_number != last_window_visited
+            let buffer_in_window = 1
+            silent execute window_number . 'wincmd w'
+            silent execute 'enew'
+            let last_window_visited = window_number
+            let window_number = bufwinnr(a:minwid)
+          endwhile
+          silent execute current_window . 'wincmd w'
+          if window_number != last_window_visited || buffer_in_window == 0
+            silent execute 'bdelete' a:minwid
+          endif
+        endif
+      endif
+    endif
 endfunction
